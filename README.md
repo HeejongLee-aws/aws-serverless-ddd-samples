@@ -36,21 +36,21 @@ docker network create local-api-network
 docker run -d -p8000:8000 --network=local-api-network --name dynamo-local amazon/dynamodb-local
 ```
    
-3. NoSQLWorkBench 를 실행합니다.
+3. 앞서 설치한 NoSQLWorkBench 를 실행하면, 아래와 같이 실행이 됩니다.
 
 <img src="./images/워크벤츠실행.PNG">
 
-4. NoSQLWorkBench 에서 로컬 연결 설정을 합니다.
+4. NoSQLWorkBench 에서 로컬 연결 설정을 합니다. **"[+ Add Connection]" 을 선택합니다.**
  
 <img src="./images/워크벤츠에서로컬연결.PNG">
 
-5. NoSQLWorkBench 에서 View Credential 을 선택 합니다.
+5. NoSQLWorkBench 에서 View Credential 을 선택 합니다. 해당 Credential 을 통해서 로컬 애플리케이션에서 AWS Dynamodb 로 연결할 수 있습니다.
  
 <img src="./images/워크벤츠에서프로파일보기.PNG">
 
 6. NoSQLWorkBench 에서 로컬 AWS Dynamodb 에 접속하기 위한 Credential 을 확인합니다.
  
-<img src="./images/크레덴셜확인.PNG.PNG">
+<img src="./images/크레덴셜확인.PNG">
 
 5. 로컬 환경의 AWS Dynamodb 를 CLI 를 통해서 액세스 하기 위한 Profile 정보를 셋팅 합니다.
 ```aws configure --profile dynamodb-local 을 실행하여 로컬 환경에서 실행합니다.```
