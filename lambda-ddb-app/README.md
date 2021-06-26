@@ -66,34 +66,3 @@ aws dynamodb update-table  --table-name Payment  --attribute-definitions Attribu
  `mocha --require ts-node/register <파일명>`
 
 ### PG 카드 인증 샘플
-uniquename=&res_msg=%C1%A4%BB%F3%C3%B3%B8%AE&escw_used=N&req_tx=pay&response_type=JSON&trace_no=T0000C2KV7KHOHGG&buyr_tel2=0100000000&an_key=2020120250145965&buyr_mail=abc%40naver.com&media_type=MC02&card_pay_method=V3D&quota=1&return_url=https%3A%2F%2Fuguoghckoh.execute-api.ap-northeast-2.amazonaws.com%2FProd%2FupdateKcpAuth&currency=410&enc_type=NO&pay_module=PMMH&ssgpay_direct=Y&good_name=%3F%3F%3F%3F+%D7%DD%BD%EC%3F%3F%3F%3F%3F%3F-%EA%B4%B4%EB%AC%BC+%3F%3F%EB%B0%3F%EB%B0%3F%286%7E7%3F%3F%29-11%2F15&kcp_ret_cancel_url=&card_code=CCSS&quotaopt=12&tablet_size=1.0&pay_method=CARD&shop_name=Emart+Culture+Club&log_number=PN01&res_cd=0000&log_request=LRJV&enc_cardno_yn=Y&site_cd=T0000&good_mny=105000&payco_direct=N&Ret_URL=https%3A%2F%2Fuguoghckoh.execute-api.ap-northeast-2.amazonaws.com%2FProd%2FupdateKcpAuth&cmd=HUB&ordr_idxx=2020120211302900000000000000000000000001&quota_month=1&xid=MjAyMDEyMDIyMDMxMDcyNDY1NTg%3D&eci=05&cavv=AAABBjR3hiAgEgIgMXeGAJAAAAA%3D&card_no=536148**********&card_enc_no=rZuZDSrr9zSI4tb1TFXk2X5ZofXk4v87X1LqJLG5d8c%3D&using_point=&save_useyn=&join_cd=&expiry_yy=79&expiry_mm=12&lgpay_enc_data=&card_lg_pay_yn=&order_id=2020120211302900000000000000000000000001&pay_type=PACA&service_cd=WS10&status_cd=STAU&trace_log_id=T0000C2KV7KHOHGG
-
-
-### SSM 파라매터 변경으로 인해 버전 변경이 필요했음
-/enrollment/skyhi/validateEnrollmentInPaymentSqsQueue:2
-/enrollment/skyhi/beginEnrollmentSqsQueue:2
-/enrollment/skyhi/endEnrollmentSqsQueue:2
-/enrollment/skyhi/removeCartSqsQueue:2
-
-
-## PowerShell 권한 확인
-1. windows PowerShell 프로그램을 관리자 권한으로 실행합니다.
-2. Get-ExecutionPolicy 명령어를 작성하면 본인의 권한? 상태가 보여집니다.
-3. 권한이 RemoteSigned 가 아니라면 Set-ExecutionPolicy RemoteSigned 를 입력
-4. Get-ExecutionPolicy 명령어로 다시 한번 확인 하면 RemoteSigned로 변경 확인.
-
-
-aws dynamodb update-table  --table-name Payment  --attribute-definitions AttributeName=SK,AttributeType=S  --global-secondary-index-updates "[{\"Create\": {\"IndexName\": \"GSI-SK\", \"KeySchema\": [{\"AttributeName\":\"SK\",\"KeyType\":\"HASH\"}], \"Projection\":{\"ProjectionType\":\"ALL\" }}}]"
-
-..
-
--------------------------------
-1. 수강횟수
-2. 캐셔이림
-3. 취소담당자
-
-
------------------------------
-카드번호
-카드사 (CARD_NAME)
-카드유효날짜
