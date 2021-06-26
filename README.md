@@ -15,7 +15,7 @@ https://nodejs.org/ko/download/
 애플리케이션동이 동작하기 위한 런타임(Runtime) 환경입니다.
 
 4. AWS Workbench 설치
-https://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/workbench.settingup.html
+https://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/workbench.settingup.html  
 로컬에 설치된 Dynamodb 를 사용하기 위한 툴입니다.
 
 
@@ -41,5 +41,10 @@ docker run -d -p8000:8000 --network=local-api-network --name dynamo-local amazon
 FOR /f "tokens=*" %i IN ('docker ps -a -q') DO docker rm --force %i
 ```
 
-3. 로컬에서 정상적으로 실행이 되었다면, NoSQLWorkBench 를 실행하여, 실행된 Dynamodb 의 접속하기 위한 Profile 을 확인합니다.
-   > `aws configure --profile dynamodb-local 을 실행하여 로컬 환경에서 실행합니다.`
+3. NoSQLWorkBench 를 실행하여, AWS Dynamodb 접속하기 위한 Profile 을 확인 합니다.
+
+<img src="./images/워크벤츠실행.PNG">
+
+
+4. 로컬 환경의 AWS Dynamodb 를 CLI 를 통해서 액세스 하기 위한 Profile 정보를 셋팅 합니다.
+```aws configure --profile dynamodb-local 을 실행하여 로컬 환경에서 실행합니다.```
