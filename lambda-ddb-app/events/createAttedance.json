@@ -1,0 +1,11 @@
+{
+    "body": "[{\"classId\":\"1\",\"classAttendee\":[\"2\"],\"classFamilySequence\":[\"1\"],\"classOriginalPrice\":10,\"classDiscountPrice\":10}]",
+    "path": "createPayment",
+    "headers": {
+      "username": "heejong"
+    },
+    "requestContext": {
+      "apiId": "1234567890"
+    }
+  }
+  

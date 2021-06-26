@@ -1,0 +1,58 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  f-app
+  Sample SAM Template for f-app
+
+Parameters:
+  MasterSecretArn:
+    Description: Master Secret ARN
+    Type: String
+  MasterSecretsManagerKey:
+    Description: KMS Key for the use of secrets across accounts
+    Type: String
+  Stage:
+    Description: Environment
+    Type: String
+  BranchName:
+    Description: Repository branch name
+    Type: String
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+    
+#######################################################################
+#
+# Lambda Functions
+#
+#  - PaymentFunction
+#  - Serveless Lambda Policy
+#    https://github.com/aws/serverless-application-model/blob/develop/samtranslator/policy_templates_data/policy_templates.json
+#######################################################################
+    
+  OrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: src/
+      Handler: app.handler
+      Runtime: nodejs12.x            
+      Timeout: 25
+
+  OrderApi:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: Prod
+      Cors:
+        AllowHeaders: "'*'"
+        AllowMethods: "'*'"
+        AllowOrigin: "'*'"
+        MaxAge: "'600'"
+        
+Outputs:
+  OrderApiEndPoint:
+    Description: "Order API End Point"
+    Value: !GetAtt AttendanceSQSFunction.Arn
+

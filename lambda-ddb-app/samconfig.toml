@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "cultureclub-payment"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1nhpe3yzx369y"
+s3_prefix = "cultureclub-payment"
+region = "ap-northeast-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "MasterSecretArn=\"\" MasterSecretsManagerKey=\"\" Stage=\"master\" BranchName=\"master\""
