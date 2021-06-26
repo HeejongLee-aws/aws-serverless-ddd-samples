@@ -26,25 +26,37 @@ C:\Users\leehee\>docker -v
 Docker version 19.03.12, build 48a66213fe
 C:\Users\leehee\>
 ```
-1. 도커 네트워크를 생성합니다.
+2. 도커 네트워크를 생성합니다.
 ```
 docker network create local-api-network
 ```
 
-2. dynamodb 컨테이너를 실행합니다. 8000 포트를 사용하며, 앞서 생성한 네트워크에 바인딩하며, dynamo-local 이라는 이름으로 실행됩니다.
+3. dynamodb 컨테이너를 실행합니다. 8000 포트를 사용하며, 앞서 생성한 네트워크에 바인딩하며, dynamo-local 이라는 이름으로 실행됩니다.
 ```
 docker run -d -p8000:8000 --network=local-api-network --name dynamo-local amazon/dynamodb-local
 ```
    
-윈도우즈 환경에서 도커를 삭제하고 싶다면,  
-```
-FOR /f "tokens=*" %i IN ('docker ps -a -q') DO docker rm --force %i
-```
-
-3. NoSQLWorkBench 를 실행하여, AWS Dynamodb 접속하기 위한 Profile 을 확인 합니다.
+3. NoSQLWorkBench 를 실행합니다.
 
 <img src="./images/워크벤츠실행.PNG">
 
+4. NoSQLWorkBench 에서 로컬 연결 설정을 합니다.
+ 
+<img src="./images/워크벤츠에서로컬연결.PNG">
 
-4. 로컬 환경의 AWS Dynamodb 를 CLI 를 통해서 액세스 하기 위한 Profile 정보를 셋팅 합니다.
+5. NoSQLWorkBench 에서 View Credential 을 선택 합니다.
+ 
+<img src="./images/워크벤츠에서프로파일보기.PNG">
+
+6. NoSQLWorkBench 에서 로컬 AWS Dynamodb 에 접속하기 위한 Credential 을 확인합니다.
+ 
+<img src="./images/크레덴셜확인.PNG.PNG">
+
+5. 로컬 환경의 AWS Dynamodb 를 CLI 를 통해서 액세스 하기 위한 Profile 정보를 셋팅 합니다.
 ```aws configure --profile dynamodb-local 을 실행하여 로컬 환경에서 실행합니다.```
+
+## 기타참고
+윈도우즈 환경에서 로컬에서 종료된 도커 컨테이너 삭제
+```
+FOR /f "tokens=*" %i IN ('docker ps -a -q') DO docker rm --force %i
+```
