@@ -27,14 +27,19 @@ Docker version 19.03.12, build 48a66213fe
 C:\Users\leehee\>
 ```
 1. 도커 네트워크를 생성합니다.
-> - `docker network create local-api-network`
+```
+docker network create local-api-network
+```
 
 2. dynamodb 컨테이너를 실행합니다. 8000 포트를 사용하며, 앞서 생성한 네트워크에 바인딩하며, dynamo-local 이라는 이름으로 실행됩니다.
-> - `docker run -d -p8000:8000 --network=local-api-network --name dynamo-local amazon/dynamodb-local`
+```
+docker run -d -p8000:8000 --network=local-api-network --name dynamo-local amazon/dynamodb-local
+```
    
 윈도우즈 환경에서 도커를 삭제하고 싶다면,  
-> - `FOR /f "tokens=*" %i IN ('docker ps -a -q') DO docker rm --force %i`
-> - `docker rm `docker ps -a -q`
+```
+FOR /f "tokens=*" %i IN ('docker ps -a -q') DO docker rm --force %i
+```
 
 3. 로컬에서 정상적으로 실행이 되었다면, NoSQLWorkBench 를 실행하여, 실행된 Dynamodb 의 접속하기 위한 Profile 을 확인합니다.
    > `aws configure --profile dynamodb-local 을 실행하여 로컬 환경에서 실행합니다.`
