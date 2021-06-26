@@ -1,13 +1,12 @@
-import IAttendance from "./interface/IOrder";
+import Money from "./Money";
+import Orderer from "./Orderer";
 import IOrder from "./interface/IOrder";
 import OrderLine from "./OrderLine";
 import OrderState from "./OrderState";
-import Money from "./Money";
-import Orderer from "./Orderer";
 
 export default class Order {
-	private PK: string;
-	private SK: string;
+	private PK: string;						// 파티션 키
+	private SK: string;						// 정렬 키
 
 	private orderNo: string;				// 주문 번호
 	private orderer: Orderer;				// 주문자
@@ -17,12 +16,19 @@ export default class Order {
 	private oderLines: Array<OrderLine>		// 주문 상품
 
 	constructor(order: IOrder) {
+		this.PK = order.orderer.name;
+		this.SK = order.orderNo;
+		this.orderNo = order.orderNo;
+		this.orderer = new Orderer(order.orderer);
+		this.totalAmount = new Money(order.totalAmount);
+		this.oderLines = new Array<OrderLine>();
+		order.orderLines.forEach( item => {
+			this.oderLines.push(new OrderLine(item));
+		})
 	}
 
-	public changeShipped(): void {
-	}
-
-	public changeShippingInfo(): void {
+	public getOrderNo(): string {
+		return this.orderNo;
 	}
 
 	public cancel():void {

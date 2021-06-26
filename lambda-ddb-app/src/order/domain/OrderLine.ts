@@ -1,4 +1,3 @@
-import IOrder from "./interface/IOrder";
 import IOrderLine from "./interface/IOrderLine";
 
 

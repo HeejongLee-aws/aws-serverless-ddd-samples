@@ -1,5 +1,5 @@
 {
-    "body": "[{\"classId\":\"1\",\"classAttendee\":[\"2\"],\"classFamilySequence\":[\"1\"],\"classOriginalPrice\":10,\"classDiscountPrice\":10}]",
+    "body": "",
     "path": "createPayment",
     "headers": {
       "username": "heejong"

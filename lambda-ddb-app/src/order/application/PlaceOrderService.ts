@@ -9,7 +9,12 @@ export default class PlaceOrderService {
 	private orderRepository: OrderRepository = new OrderDynamodbRepository();
 
 	public async placeOrder(orderCancel:IPlaceOrder): Promise<string> {
-		throw new Error("개발중")
+
+		// 주문번호를 생성한다.
+
+		// 주문을 생성한다.
+
+		// 저장한다.
 	}
 	
 }
