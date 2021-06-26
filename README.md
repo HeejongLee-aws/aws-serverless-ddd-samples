@@ -1,3 +1,6 @@
+# Domain Driven Design 과 함께 하는 AWS Servelress 
+AWS Lambda 와 AWS Dynamodb 를 기반으로 Serverless 애플리케이션 개발을 시작하기 위해서는 아래 툴을 반드시 설치해주세요.
+
 ## 사전 필수 설치
 1. Desktop Docker  
 https://docs.docker.com/docker-for-windows/install/  
