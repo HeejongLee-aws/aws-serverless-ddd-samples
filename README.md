@@ -56,7 +56,20 @@ docker run -d -p8000:8000 --network=local-api-network --name dynamo-local amazon
 ```aws configure --profile dynamodb-local 을 실행하여 로컬 환경에서 실행합니다.```
 
 ## 기타참고
-윈도우즈 환경에서 로컬에서 종료된 도커 컨테이너 삭제
+- 윈도우즈 환경에서 로컬에서 종료된 도커 컨테이너 삭제
 ```
 FOR /f "tokens=*" %i IN ('docker ps -a -q') DO docker rm --force %i
 ```
+
+- Dynamodbd 에 정상적으로 접속이 되는지 확인합니다.
+```aws dynamodb list-tables --endpoint-url http://localhost:8000 --profile dynamodb-local
+aws dynamodb create-table --table-name Attendance --attribute-definitions AttributeName=PK,AttributeType=S AttributeName=SK,AttributeType=S  --key-schema AttributeName=PK,KeyType=HASH AttributeName=SK,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8000 --profile dynamodb-local 
+aws dynamodb update-table  --table-name Payment  --attribute-definitions AttributeName=TopScore,AttributeType=N  --global-secondary-index-updates "[{\"Create\": {\"IndexName\": \"GSI-SK\", \"KeySchema\": [{\"AttributeName\":\"SK\",\"KeyType\":\"HASH\"}], \"Projection\":{\"ProjectionType\":\"ALL\" }}}]"
+```
+
+- 테이블을 삭제   
+```
+aws dynamodb delete-table --table-name Payment --endpoint-url http://localhost:8000 --profile dynamodb-local
+aws dynamodb delete-table --table-name PaymentClass --endpoint-url http://localhost:8000 --profile dynamodb-local
+```
+
