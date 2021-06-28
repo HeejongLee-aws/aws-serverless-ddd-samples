@@ -1,7 +1,7 @@
 # 사전 필수 설치
 
 ## VSCode 설치
-소스 코드의 편집 및 내용을 확인하기 위해 아래 Editor 를 설치해주세요.
+소스 코드의 편집 및 내용을 확인하기 위해 아래 Editor 를 설치해주세요.  
 https://code.visualstudio.com/
 
 ## ts-node 설치
@@ -18,17 +18,20 @@ Unit 테스트 실행을 위한 Mocha 를 설치 합니다.
 
 # 따라하기
 ## 빌드 및 테스트
+실행에 필요한 관련된 라이브러리를 다운로드 하고 구성합니다.
 ```
 npm install
 ```  
+빌드가 되는지 확인합니다.
 ```
 npm run build
 ```
 
 ## 워크벤치에 접속하여 테이블 생성하기
-
+설치된 워크 벤치를 실행하고, 로컬 Connection 을 접속하여, 필요한 테이블을 생성합니다.
 
 ## Windows 환경에서 유닛 테스트 
+생성한 테이블에 주문 aggregate 를 생성 및 조회를 합니다.
 
 ```
 C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\OrderDynamoDbRepository.spec.ts
