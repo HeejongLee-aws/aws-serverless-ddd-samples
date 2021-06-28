@@ -6,6 +6,7 @@ export default interface IOrder {
     orderLines: Array<IOrderLine>;
     totalAmount: IMoney;
     orderer: IOrderer;
+    userId: string;
     orderNo: string;
 }
 

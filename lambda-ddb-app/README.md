@@ -30,15 +30,29 @@ npm run build
 ## 워크벤치에 접속하여 테이블 생성하기
 설치된 워크 벤치를 실행하고, 로컬 Connection 을 접속하여, 필요한 테이블을 생성합니다.
 
-## Windows 환경에서 유닛 테스트 
-생성한 테이블에 주문 aggregate 를 생성 및 조회를 합니다.
+## 주문 데이터 생성하기 
+```
+C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\CreateOrder.ts
+```
 
+## 주문 데이터 가져오기 
 ```
-C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\OrderDynamoDbRepository.spec.ts
+C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\GetOrder.ts
 ```
+
+## 나의 주문 데이터 조회하기 
+```
+C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\GetOrder.ts
+```
+
+## 나의 주문 데이터 조회하기 
+```
+C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\FindByUserId.ts
+```
+
+
 
 ## 워크벤치에서 테이블 내용 조회
-
 
 ## 스키마를 추가 해보기
 
