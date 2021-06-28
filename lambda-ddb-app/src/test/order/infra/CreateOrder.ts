@@ -15,7 +15,8 @@ describe('CreateOrder.spec.ts Test suite', function() {
                         { productId: '01', productName: "복숭아",  },
                         { productId: '02', productName: "사과",  }
                     ],
-                    totalAmount: { amount: 200 }
+                    totalAmount: { amount: 200 },
+                    orderDate:'20220627092214'
                 }
         );
 
@@ -28,7 +29,8 @@ describe('CreateOrder.spec.ts Test suite', function() {
                     {   productId: '01', productName: "복숭아",},
                     {   productId: '02', productName: "사과",}
                 ],
-                totalAmount: { amount: 200 }
+                totalAmount: { amount: 200 },
+                orderDate:'20220628092214'
             }
         );
 

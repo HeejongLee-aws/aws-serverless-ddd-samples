@@ -30,29 +30,32 @@ npm run build
 ## 워크벤치에 접속하여 테이블 생성하기
 설치된 워크 벤치를 실행하고, 로컬 Connection 을 접속하여, 필요한 테이블을 생성합니다.
 
-## 주문 데이터 생성하기 
+## 1. 주문 데이터 생성하기 
 ```
 C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\CreateOrder.ts
 ```
 
-## 주문 데이터 가져오기 
+## 2. 주문 데이터 가져오기 
 ```
 C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\GetOrder.ts
 ```
 
-## 나의 주문 데이터 조회하기 
+## 3. 나의 주문 데이터 조회하기 
 ```
 C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\GetOrder.ts
 ```
 
-## 나의 주문 데이터 조회하기 
+## 4. 나의 주문 데이터 조회하기 
 ```
 C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\FindByUserId.ts
 ```
 
-## 워크벤치에서 테이블 내용 조회
+## 5. GSI 를 추가해서 데이터를 조회해 보기 
+```
+C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\FindByOrderDate.ts
+```
 
-## 스키마를 추가 해보기
+## 6. 스키마를 추가 해보기
 
 
 

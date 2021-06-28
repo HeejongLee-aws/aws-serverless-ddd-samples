@@ -59,7 +59,6 @@ export default class OrderDynamoDbRepository implements OrderRepository  {
 
         const queryItem = {
             TableName: 'Order',
-            // IndexName: 'Index',
             KeyConditionExpression: 'PK = :hkey',
             ExpressionAttributeValues: {
                 ':hkey': userId,
@@ -73,4 +72,26 @@ export default class OrderDynamoDbRepository implements OrderRepository  {
 
         return orders;
     }
+
+    public async findByOrderDate(orderDate: string): Promise<Array<Order>> {
+
+        const queryItem = {
+            TableName: 'Order',
+            IndexName: 'orderDate',
+            KeyConditionExpression: 'orderDate = :hkey',
+            ExpressionAttributeValues: {
+                ':hkey': orderDate,
+            }
+        };
+
+        const item = await this.docClient.query(queryItem).promise();
+        const orders = new Array<Order>();
+        item.Items?.forEach(item => {
+            orders.push( new Order(<IOrder> item) );
+            orders.push( new Order(<IOrder> item) );
+        })
+
+        return orders;
+    }
+
 }

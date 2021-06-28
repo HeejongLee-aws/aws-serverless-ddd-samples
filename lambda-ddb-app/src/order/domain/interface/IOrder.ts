@@ -8,5 +8,6 @@ export default interface IOrder {
     orderer: IOrderer;
     userId: string;
     orderNo: string;
+    orderDate: string;
 }
 

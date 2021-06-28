@@ -16,8 +16,11 @@ export default class Order {
 	private totalAmount: Money;				// 총 주문 금액
 	private orderLines: Array<OrderLine>	// 주문 상품
 
+	private orderDate: string;
+
 	constructor(order: IOrder) {
 		this.PK = order.userId;
+		this.userId = order.userId;
 		this.SK = order.orderNo;
 		this.orderNo = order.orderNo;
 		this.orderer = new Orderer(order.orderer);
@@ -25,7 +28,9 @@ export default class Order {
 		this.orderLines = new Array<OrderLine>();
 		order.orderLines.forEach( item => {
 			this.orderLines.push(new OrderLine(item));
-		})
+		});
+
+		this.orderDate = order.orderDate;
 	}
 
 	public getOrderNo(): string {
