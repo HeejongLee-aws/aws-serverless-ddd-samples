@@ -1,5 +1,5 @@
 # Domain Driven Design 과 함께 하는 AWS Serverless 
-AWS Lambda 와 AWS Dynamodb 를 기반으로 Serverless 애플리케이션 개발을 시작하기 위해서는 아래 툴을 반드시 설치해주세요.
+AWS Lambda 와 AWS Dynamodb를 이용하여 Serverless 애플리케이션을 개발합니다.
 
 ## 사전 필수 설치
 1. Desktop Docker  
@@ -62,14 +62,15 @@ FOR /f "tokens=*" %i IN ('docker ps -a -q') DO docker rm --force %i
 ```
 
 - Dynamodbd 에 정상적으로 접속이 되는지 확인합니다.
-```aws dynamodb list-tables --endpoint-url http://localhost:8000 --profile dynamodb-local
-aws dynamodb create-table --table-name Attendance --attribute-definitions AttributeName=PK,AttributeType=S AttributeName=SK,AttributeType=S  --key-schema AttributeName=PK,KeyType=HASH AttributeName=SK,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8000 --profile dynamodb-local 
-aws dynamodb update-table  --table-name Payment  --attribute-definitions AttributeName=TopScore,AttributeType=N  --global-secondary-index-updates "[{\"Create\": {\"IndexName\": \"GSI-SK\", \"KeySchema\": [{\"AttributeName\":\"SK\",\"KeyType\":\"HASH\"}], \"Projection\":{\"ProjectionType\":\"ALL\" }}}]"
+```
+aws dynamodb list-tables --endpoint-url http://localhost:8000 --profile ddb-local
+aws dynamodb create-table --table-name Order --attribute-definitions AttributeName=PK,AttributeType=S AttributeName=SK,AttributeType=S  --key-schema AttributeName=PK,KeyType=HASH AttributeName=SK,KeyType=RANGE --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5 --endpoint-url http://localhost:8000 --profile dynamodb-local 
+
 ```
 
 - 테이블을 삭제   
 ```
-aws dynamodb delete-table --table-name Payment --endpoint-url http://localhost:8000 --profile dynamodb-local
-aws dynamodb delete-table --table-name PaymentClass --endpoint-url http://localhost:8000 --profile dynamodb-local
+aws dynamodb delete-table --table-name Payment --endpoint-url http://localhost:8000 --profile ddb-local
+aws dynamodb delete-table --table-name PaymentClass --endpoint-url http://localhost:8000 --profile ddb-local
 ```
 

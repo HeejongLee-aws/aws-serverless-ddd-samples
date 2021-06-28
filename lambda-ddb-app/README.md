@@ -50,8 +50,6 @@ C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\ord
 C:\Users\leehee\github\serverless-samples\lambda-ddb-app>test.bat .\src\test\order\infra\FindByUserId.ts
 ```
 
-
-
 ## 워크벤치에서 테이블 내용 조회
 
 ## 스키마를 추가 해보기
