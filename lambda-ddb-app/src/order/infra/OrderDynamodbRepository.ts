@@ -31,67 +31,24 @@ export default class OrderDynamoDbRepository implements OrderRepository  {
     private docClient = getDocumentClient();
 
     public async save(order: Order): Promise<string> {
-        const putItem = {
-            "TableName": "Order",
-            "Item": order,
-        }
-        const result = await this.docClient.put(putItem).promise();
-        return order.getOrderNo();
+        throw new Error("not implemented");
     }
 
 
     public async get(userId:string, orderNo:string): Promise<Order> {
 
-        const getItem = {
-            TableName : 'Order',
-            Key: {
-                PK: userId,
-                SK: orderNo
-            }
-        };
-
-        const item = await this.docClient.get(getItem).promise();
-        return new Order(<IOrder> item.Item);
+        throw new Error("not implemented");
     }
 
 
     public async findByUserId(userId: string): Promise<Array<Order>> {
 
-        const queryItem = {
-            TableName: 'Order',
-            KeyConditionExpression: 'PK = :hkey',
-            ExpressionAttributeValues: {
-                ':hkey': userId,
-            }
-        };
-        const item = await this.docClient.query(queryItem).promise();
-        const orders = new Array<Order>();
-        item.Items?.forEach(item => {
-            orders.push( new Order(<IOrder> item) );
-        })
-
-        return orders;
+        throw new Error("not implemented");
     }
 
     public async findByOrderDate(orderDate: string): Promise<Array<Order>> {
 
-        const queryItem = {
-            TableName: 'Order',
-            IndexName: 'orderDate',
-            KeyConditionExpression: 'orderDate = :hkey',
-            ExpressionAttributeValues: {
-                ':hkey': orderDate,
-            }
-        };
-
-        const item = await this.docClient.query(queryItem).promise();
-        const orders = new Array<Order>();
-        item.Items?.forEach(item => {
-            orders.push( new Order(<IOrder> item) );
-            orders.push( new Order(<IOrder> item) );
-        })
-
-        return orders;
+        throw new Error("not implemented");
     }
 
 }
