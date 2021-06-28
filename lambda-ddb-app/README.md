@@ -15,4 +15,5 @@
 ## Windows 환경에서 유닛 테스트 
 ```
 mocha --require ts-node/register <파일명>
+mocha --require ts-node/register .\src\test\order\infra\OrderDynamoDbRepository.spec.ts
 ```

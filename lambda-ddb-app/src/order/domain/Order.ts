@@ -13,7 +13,7 @@ export default class Order {
 
 	private state: OrderState;				// 주문 상태
 	private totalAmount: Money;				// 총 주문 금액
-	private oderLines: Array<OrderLine>		// 주문 상품
+	private orderLines: Array<OrderLine>	// 주문 상품
 
 	constructor(order: IOrder) {
 		this.PK = order.orderer.name;
@@ -21,9 +21,10 @@ export default class Order {
 		this.orderNo = order.orderNo;
 		this.orderer = new Orderer(order.orderer);
 		this.totalAmount = new Money(order.totalAmount);
-		this.oderLines = new Array<OrderLine>();
+		this.orderLines = new Array<OrderLine>();
+		console.log(order.orderLines);
 		order.orderLines.forEach( item => {
-			this.oderLines.push(new OrderLine(item));
+			this.orderLines.push(new OrderLine(item));
 		})
 	}
 

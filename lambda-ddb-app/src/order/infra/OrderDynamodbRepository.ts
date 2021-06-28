@@ -3,6 +3,7 @@ import OrderRepository from '../domain/OrderRepository';
 import aws, {DynamoDB} from "aws-sdk";
 import {DocumentClient} from "aws-sdk/clients/dynamodb";
 import "dotenv/config";
+import IOrder from "../domain/interface/IOrder";
 const tableName = String(process.env.LOCAL_TEST ? "Order" : process.env.ORDER_TABLE)
 
 export const getDynamoDB = ():DynamoDB => {
@@ -39,8 +40,37 @@ export default class OrderDynamoDbRepository implements OrderRepository  {
     }
 
 
-    public async get(orderName:string, orderNo: string): Promise<Order> {
+    public async get(ordererName:string, orderNo:string): Promise<Order> {
 
-        throw new Error('Method not implemented.');
+        const getItem = {
+            TableName : 'Order',
+            Key: {
+                PK: ordererName,
+                SK: orderNo
+            }
+        };
+
+        const item = await this.docClient.get(getItem).promise();
+        return new Order(<IOrder> item.Item);
+    }
+
+
+    public async findByOrdererName(ordererName: string): Promise<Array<Order>> {
+
+        const queryItem = {
+            TableName: 'Order',
+            // IndexName: 'Index',
+            KeyConditionExpression: 'PK = :hkey',
+            ExpressionAttributeValues: {
+                ':hkey': ordererName,
+            }
+        };
+        const item = await this.docClient.query(queryItem).promise();
+        const orders = new Array<Order>();
+        item.Items?.forEach(item => {
+            orders.push( new Order(<IOrder> item) );
+        })
+
+        return orders;
     }
 }
