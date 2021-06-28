@@ -18,6 +18,9 @@ https://nodejs.org/ko/download/
 https://docs.aws.amazon.com/ko_kr/amazondynamodb/latest/developerguide/workbench.settingup.html  
 로컬에 설치된 Dynamodb 를 사용하기 위한 툴입니다.
 
+5. AWS CLI 설치
+https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/install-windows.html
+aws cli 설치합니다. dynamodb 테이블 생성 및 삭제 등에 사용됩니다.
 
 ## AWS Dynamodb 로컬 환경 구성하기
 1. 도커가 설치되어 있는지 확인합니다.
@@ -53,7 +56,14 @@ docker run -d -p8000:8000 --network=local-api-network --name dynamo-local amazon
 <img src="./images/크레덴셜확인.PNG">
 
 5. 로컬 환경의 AWS Dynamodb 를 CLI 를 통해서 액세스 하기 위한 Profile 정보를 셋팅 합니다.
-```aws configure --profile dynamodb-local 을 실행하여 로컬 환경에서 실행합니다.```
+```
+C:\Users\leehee\github\serverless-samples\lambda-ddb-app>aws configure --profile ddb-local
+AWS Access Key ID [****************fkjj]: 5wfkjj
+AWS Secret Access Key [****************4smr]: 0k4smr
+Default region name [None]: localhost
+Default output format [None]: json
+
+```
 
 ## 기타참고
 - 윈도우즈 환경에서 로컬에서 종료된 도커 컨테이너 삭제
@@ -70,7 +80,6 @@ aws dynamodb create-table --table-name Order --attribute-definitions AttributeNa
 
 - 테이블을 삭제   
 ```
-aws dynamodb delete-table --table-name Payment --endpoint-url http://localhost:8000 --profile ddb-local
-aws dynamodb delete-table --table-name PaymentClass --endpoint-url http://localhost:8000 --profile ddb-local
+aws dynamodb delete-table --table-name Order --endpoint-url http://localhost:8000 --profile ddb-local
 ```
 
