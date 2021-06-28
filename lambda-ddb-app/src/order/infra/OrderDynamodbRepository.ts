@@ -40,12 +40,12 @@ export default class OrderDynamoDbRepository implements OrderRepository  {
     }
 
 
-    public async get(ordererName:string, orderNo:string): Promise<Order> {
+    public async get(userId:string, orderNo:string): Promise<Order> {
 
         const getItem = {
             TableName : 'Order',
             Key: {
-                PK: ordererName,
+                PK: userId,
                 SK: orderNo
             }
         };
@@ -55,14 +55,14 @@ export default class OrderDynamoDbRepository implements OrderRepository  {
     }
 
 
-    public async findByOrdererName(ordererName: string): Promise<Array<Order>> {
+    public async findByUserId(userId: string): Promise<Array<Order>> {
 
         const queryItem = {
             TableName: 'Order',
             // IndexName: 'Index',
             KeyConditionExpression: 'PK = :hkey',
             ExpressionAttributeValues: {
-                ':hkey': ordererName,
+                ':hkey': userId,
             }
         };
         const item = await this.docClient.query(queryItem).promise();
