@@ -3,7 +3,6 @@ import OrderRepository from '../domain/OrderRepository';
 import aws, {DynamoDB} from "aws-sdk";
 import {DocumentClient} from "aws-sdk/clients/dynamodb";
 import "dotenv/config";
-import IOrder from "../domain/interface/IOrder";
 const tableName = String(process.env.LOCAL_TEST ? "Order" : process.env.ORDER_TABLE)
 
 export const getDynamoDB = ():DynamoDB => {

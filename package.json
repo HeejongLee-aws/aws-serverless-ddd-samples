@@ -1,7 +1,7 @@
 {
-  "name": "attendance",
+  "name": "payment",
   "version": "1.0.0",
-  "description": "emartCultureClub-attendance",
+  "description": "emartCultureClub-payment",
   "main": "src/index.js",
   "repository": "https://github.com/awslabs/aws-sam-cli/tree/develop/samcli/local/init/templates/cookiecutter-aws-sam-hello-nodejs",
   "author": "SAM CLI",
@@ -12,6 +12,7 @@
     "@typescript-eslint/parser": "^4.8.1",
     "aws-sdk": "^2.794.0",
     "axios": "^0.18.0",
+    "calendar": "^0.1.1",
     "dotenv": "^8.2.0",
     "eslint": "^7.14.0",
     "eslint-plugin-no-loops": "^0.3.0",
