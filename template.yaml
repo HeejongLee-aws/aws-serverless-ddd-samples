@@ -13,12 +13,67 @@ Resources:
   OrderApi:
     Type: AWS::Serverless::Api
     Properties:
+      TracingEnabled: True
       StageName: Prod
       Cors:
         AllowHeaders: "'*'"
         AllowMethods: "'*'"
         AllowOrigin: "'*'"
         MaxAge: "'600'"
+
+  ApiKey:
+    Type: AWS::AppSync::ApiKey
+    Properties:
+      ApiId: !GetAtt PeachWorldGraphQL.ApiId
+      Description: Forntend AppSync API Key for event
+
+  PeachWorldGraphQL:
+    Type: AWS::AppSync::GraphQLApi
+    Properties:
+      Name: "PeachWorld"
+      AuthenticationType: "AWS_IAM"
+      XrayEnabled: True
+
+  OrderServiceDataSource:
+    Type: 'AWS::AppSync::DataSource'
+    Properties:
+      ApiId: !GetAtt PeachWorldGraphQL.ApiId
+      Description: User service data source
+      HttpConfig:
+        Endpoint: !Sub "https://${OrderApi}.execute-api.${AWS::Region}.amazonaws.com"
+        AuthorizationConfig:
+          AuthorizationType: AWS_IAM
+          AwsIamConfig:
+            SigningRegion: !Sub '${AWS::Region}'
+            SigningServiceName: execute-api
+      Name: "OrderService"
+      Type: HTTP
+      ServiceRoleArn: !GetAtt
+        - OrderServiceDataSourceIamRole
+        - Arn
+
+  OrderServiceDataSourceIamRole:
+    Type: 'AWS::IAM::Role'
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - appsync.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Description: Role assigned to OrderServiceDataSources
+      Policies:
+        - PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Action: 'execute-api:Invoke'
+                Effect: Allow
+                Resource: !Sub >-
+                  arn:aws:execute-api:${AWS::Region}:*:${OrderApi}/*
+          PolicyName: OrderServiceDataSourceIamPolicy
 
   OrderFunction:
     Type: AWS::Serverless::Function
@@ -33,9 +88,48 @@ Resources:
           Type: Api
           Properties:
             Path: /order
-            Method: POST
+            Method: GET
             RestApiId: !Ref OrderApi
+            Auth:
+              Authorizer: AWS_IAM
+              InvokeRole: NONE
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref OrderTable
+      Environment:
+        Variables:
+          OrderTable: !Ref OrderTable
 
+  OrderTable:
+    DeletionPolicy: Retain
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: "PK"
+          AttributeType: "S"
+        - AttributeName: "SK"
+          AttributeType: "S"
+
+      KeySchema:
+        - AttributeName: "PK"
+          KeyType: "HASH"
+        - AttributeName: "SK"
+          KeyType: "RANGE"
+
+      GlobalSecondaryIndexes:
+        - IndexName: "GSI-SK"
+          KeySchema:
+            - AttributeName: "SK"
+              KeyType: "HASH"
+          Projection:
+            ProjectionType: "ALL"
+          ProvisionedThroughput:
+            ReadCapacityUnits: 5
+            WriteCapacityUnits: 5
+
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
 Outputs:
   OrderApiEndPoint:
     Description: "Order API End Point"

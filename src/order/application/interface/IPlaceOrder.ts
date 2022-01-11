@@ -1,3 +1,3 @@
-export default interface IPlaceOrder {
-	
+export default interface IPlaceOrderRequest {
+	id: string
 }

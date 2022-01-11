@@ -1,9 +1,23 @@
+import PlaceOrderController from "./order/controller/PlaceOrderController";
+
+interface AwsResponse {
+	statusCode: number;
+	headers?: object;
+	body: any;
+}
+
 exports.handler = async (event:any, context:any) => {
 	
-	try{
-		console.log("hello");
-	}catch(error){
-		console.log("hello error", error);
-	}
-	return {};
+	console.log(event);
+	const message = {value: "heejong"};
+
+	const placeOrderController = new PlaceOrderController();
+	await placeOrderController.placeOrder();
+
+	const response = {
+		statusCode: 200,
+		body: JSON.stringify(message)
+	};
+
+	return  response;
 }
